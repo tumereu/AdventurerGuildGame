@@ -5,13 +5,13 @@ using Assets.Scripts.Model;
 
 public class GameController : MonoBehaviour {
 
-    private LinkedList<Dungeon> currentDungeons;
+    private List<Dungeon> currentDungeons;
     [HideInInspector]
     public GUIController guiController;
 
 	// Use this for initialization
 	void Start () {
-        this.currentDungeons = new LinkedList<Dungeon>();
+        this.currentDungeons = new List<Dungeon>();
         this.InitializeDungeons();
 	}
 
@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
     {
         for (int i = 0; i < 25; i++)
         {
-            this.currentDungeons.AddLast(DungeonGenerator.generateRandomDungeon(1));
+            this.currentDungeons.Add(DungeonGenerator.generateRandomDungeon(1));
             this.guiController.RefreshDungeons();
         }
     }
@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-    internal LinkedList<Dungeon> CurrentDungeons
+    internal List<Dungeon> CurrentDungeons
     {
         get { return currentDungeons; }
         set { currentDungeons = value;  }

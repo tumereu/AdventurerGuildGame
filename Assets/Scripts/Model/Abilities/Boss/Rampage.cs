@@ -8,7 +8,7 @@ namespace Assets.Scripts.Model.Abilities.Boss
     class Rampage : Ability
     {
 
-        private int attackSpeedIncrease = 10;
+        private int damageIncrease = 10;
 
         public Rampage()
         {
@@ -20,7 +20,7 @@ namespace Assets.Scripts.Model.Abilities.Boss
         override protected string GetDescription()
         {
             string desc = "Each attack increases your\n" +
-                "attack speed by <color=" + Damage.ColorForElement(Damage.PHYSICAL) + ">10%</color>.";
+                "damage by <color=" + Damage.ColorForElement(Damage.PHYSICAL) + ">" + damageIncrease + "%</color>.";
             return desc;
         }
     }

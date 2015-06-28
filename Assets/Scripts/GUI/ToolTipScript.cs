@@ -4,8 +4,15 @@ using Assets.Scripts.Model.Abilities.Boss;
 
 public class ToolTipScript : MonoBehaviour {
 
-    [Multiline]
-    public string text;
+    private string text;
+    public string Text
+    {
+        get { return text; }
+        set { 
+            text = value;
+            this.RefreshContent();
+        }
+    }
     private GUIContent content;
     private Vector2 contentSize;
     public GUISkin style;
@@ -13,11 +20,14 @@ public class ToolTipScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Rampage rampage = new Rampage();
-        this.text = rampage.GetInfo();
-        this.content = new GUIContent(text);
-        this.contentSize = style.box.CalcSize(content);
+        this.RefreshContent();
 	}
+
+    void RefreshContent()
+    {
+        this.content = new GUIContent(Text);
+        this.contentSize = style.box.CalcSize(content);
+    }
 
     void OnGUI()
     {

@@ -11,10 +11,14 @@ public class GUIController : MonoBehaviour {
     private GameObject dungeonSelectPanel;
     [SerializeField]
     private GameObject dungeonSelectButton;
+    [SerializeField]
+    private GameObject dungeonLayoutPanel;
+    private DungeonInfoUpdater dungeonInfoUpdater;
 
 	// Use this for initialization
 	void Start () {
         this.gameController.guiController = this;
+        this.dungeonInfoUpdater = this.dungeonLayoutPanel.GetComponent<DungeonInfoUpdater>();
 	}
 	
 	// Update is called once per frame
@@ -31,12 +35,21 @@ public class GUIController : MonoBehaviour {
             Destroy(button);
         }
         //And Build current ones anew
-        foreach (Dungeon dung in gameController.CurrentDungeons)
+        
+        for (int i = 0; i < gameController.CurrentDungeons.Count; i++)
         {
+            Dungeon dung  = gameController.CurrentDungeons[i];
             GameObject button = Instantiate(this.dungeonSelectButton) as GameObject;
             Text text = button.GetComponentInChildren<Text>();
             text.text = dung.GetDescription();
             button.transform.SetParent(dungeonSelectPanel.transform);
+            button.GetComponent<DungeonSelectorScript>().index = i;
         }
+    }
+
+    public void DungeonSelected(int index)
+    {
+        Dungeon dungeon = this.gameController.CurrentDungeons[index];
+        this.dungeonInfoUpdater.UpdateDungeon(dungeon);
     }
 }

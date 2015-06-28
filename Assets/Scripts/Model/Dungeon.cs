@@ -22,9 +22,17 @@ namespace Assets.Scripts.Model
         private int recommendedLevel;
         private string enviroment;
 
+        private List<DungeonEncounter> encounters;
+
+        public List<DungeonEncounter> Encounters
+        {
+            get { return encounters; }
+            set { encounters = value; }
+        }
+
         public Dungeon()
         {
-
+            this.encounters = new List<DungeonEncounter>();
         }
 
         public string Enviroment

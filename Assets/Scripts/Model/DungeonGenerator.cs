@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Model.Encounters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,8 +30,21 @@ namespace Assets.Scripts.Model
             dungeon.Enviroment = Dungeon.enviroments[UnityEngine.Random.Range(0, Dungeon.enviroments.Length)];
             dungeon.Name = Dungeon.hazardousnessLevels[dungeon.Hazardousness] + " " + dungeon.Enviroment + " of " + 
                 adjectives[UnityEngine.Random.Range(0, adjectives.Length)];
+            generateDungeonContent(dungeon);
 
             return dungeon;
+        }
+
+        private static void generateDungeonContent(Dungeon d)
+        {
+            float loc = 0.08f + (float)(rand.NextDouble() * 0.04);
+            while (loc <= 0.9f)
+            {
+                Combat combat = new Combat();
+                combat.Location = loc;
+                d.Encounters.Add(combat);
+                loc += 0.06f + (float)(rand.NextDouble() * 0.12);
+            }
         }
 
         private static int GenerateRandomHazardousness(int level) {
